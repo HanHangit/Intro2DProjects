@@ -13,15 +13,9 @@ namespace Intro_18._10
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        //Texture of our Human
-        Texture2D human;
+        Player player;
 
-        Enemy bernd;
-
-        //Position of our human
-        Vector2 position;
-
-        Vector2 move;
+        Enemy enemy;
 
 
 
@@ -42,9 +36,6 @@ namespace Intro_18._10
         {
             // TODO: Add your initialization logic here
 
-            //Set our position
-            position = new Vector2(0, 0);
-
             base.Initialize();
         }
 
@@ -57,8 +48,9 @@ namespace Intro_18._10
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // TODO: use this.Content to load your game content here
-            human = Content.Load<Texture2D>("human");
+            //Create our Player
+            player = new Player(Content.Load<Texture2D>("human"), new Vector2(100, 100), 1);
+            enemy = new Enemy(Content.Load<Texture2D>("hunter"), new Vector2(200, 400), 0.3f, player);
         }
 
         /// <summary>
@@ -70,34 +62,6 @@ namespace Intro_18._10
             // TODO: Unload any non ContentManager content here
         }
 
-        void KeyboardInput()
-        {
-            //Just save our KeyboardState in Key
-            KeyboardState key = Keyboard.GetState();
-
-            //Set Move-Vector to (0,0)
-            move = Vector2.Zero;
-
-            //Check if Left Key is Down
-            if (key.IsKeyDown(Keys.Left))
-                move.X += -1;
-
-            //Check if Right Key is Down
-            if (key.IsKeyDown(Keys.Right))
-                move.X += 1;
-
-            //Check if Up Key is Down
-            if (key.IsKeyDown(Keys.Up))
-                move.Y += -1;
-
-            //Check if Down Key is Down
-            if (key.IsKeyDown(Keys.Down))
-                move.Y += 1;
-
-            position += move;
-
-
-        }
 
         /// <summary>
         /// Allows the game to run logic such as updating the world,
@@ -109,10 +73,9 @@ namespace Intro_18._10
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
 
-            // TODO: Add your update logic here
-
-            KeyboardInput();
-
+            //Call Update() Function
+            player.Update(gameTime);
+            enemy.Update(gameTime);
             
             base.Update(gameTime);
         }
@@ -130,9 +93,9 @@ namespace Intro_18._10
             //spriteBatch.Begin() Call! Dont Forget!
             spriteBatch.Begin();
 
-            //Drawing Function spriteBatch.Draw("Our Texture", "Position", "Color Mask")
-            spriteBatch.Draw(human, position, Color.White);
-
+            //Call Draw() FUnction from Player
+            player.Draw(spriteBatch);
+            enemy.Draw(spriteBatch);
 
             //spriteBatch.End() Call! Dont Forget!
             spriteBatch.End();
