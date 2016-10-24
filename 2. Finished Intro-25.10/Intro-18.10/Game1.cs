@@ -49,8 +49,8 @@ namespace Intro_18._10
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             //Create our Player
-            player = new Player(Content.Load<Texture2D>("human"), new Vector2(100, 100), 1);
-            enemy = new Enemy(Content.Load<Texture2D>("hunter"), new Vector2(200, 400), 0.3f, player);
+            player = new Player(Content.Load<Texture2D>("human"), new Vector2(100, 100),1, 100);
+            enemy = new Enemy(Content.Load<Texture2D>("hunter"), new Vector2(200, 400), 0.3f,100,1, player);
         }
 
         /// <summary>

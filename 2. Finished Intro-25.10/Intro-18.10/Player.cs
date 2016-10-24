@@ -14,10 +14,16 @@ namespace Intro_18._10
         //Class Member Declaration
 
         //MovingSpeed
-        public float speed;
+        float speed;
 
         //Current Position
         public Vector2 position;
+
+        //Size of Texture
+        public Vector2 size;
+
+        //Current LifePoints
+        float health;
 
         //Human Texture
         Texture2D texture;
@@ -32,13 +38,16 @@ namespace Intro_18._10
         /// <param name="text">The Texture which shouldt be drawn</param>
         /// <param name="pos">Start Position</param>
         /// <param name="speed">Moving Speed</param>
-        public Player(Texture2D text, Vector2 pos, float speed)
+        public Player(Texture2D text, Vector2 pos, float speed, float health)
         {
             //Define our ClassMember Variable
             this.speed = speed;
+            this.health = health;
             position = pos;
             texture = text;
             move = Vector2.Zero;
+
+            size = new Vector2(text.Width, text.Height);
         }
 
         //Handle KeyboardInput Movement Control
@@ -69,6 +78,20 @@ namespace Intro_18._10
             position += move;
 
 
+        }
+
+        //Function for attacking Player
+        public void ApplyDamage(float amount)
+        {
+            //Check if we survive the attack
+            if (health > amount)
+                health -= amount;
+            else
+            {
+                //Reset our health and position
+                health = 100;
+                position = new Vector2(100, 100);
+            }
         }
 
         public void Update(GameTime gTime)
