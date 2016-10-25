@@ -12,17 +12,24 @@ namespace MakeEnemys
     class Player
     {
         //Class Member
+        //Texture
         Texture2D texture;
+
+        //Current Player Position
+        //Public -> We need the Position in our Enemy Class
         public Vector2 position;
 
+        //Constructor with Input Parameters
         public Player(Texture2D playerTexture, Vector2 playerPosition)
         {
+            //Define CLass Member
             texture = playerTexture;
             position = playerPosition;
         }
 
         public void Update()
         {
+            //Get Movement Control see 1. Project
             KeyboardState key = Keyboard.GetState();
             
             if (key.IsKeyDown(Keys.Left))
@@ -40,7 +47,8 @@ namespace MakeEnemys
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, new Rectangle(50, 50, 300, 300), texture.Bounds, Color.White);
+            //Draw Texture
+            spriteBatch.Draw(texture, position, Color.White);
         }
     }
 }
