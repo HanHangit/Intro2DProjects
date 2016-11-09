@@ -2,31 +2,18 @@
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 
-namespace Intro_18._10
+namespace Map_Collision
 {
     /// <summary>
     /// This is the main type for your game.
     /// </summary>
     public class Game1 : Game
     {
-        //Declaration of class member variables
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
-        //Texture of our Human
-        Texture2D human;
-
-        //Position of our human
-        Vector2 position;
-
-        //Move Vector of our human
-        Vector2 move;
-
-        //The Map
-        TileMap map;
-
-
-
+        Player player;
+        Tilemap tileMap;
 
         public Game1()
         {
@@ -43,10 +30,8 @@ namespace Intro_18._10
         protected override void Initialize()
         {
             // TODO: Add your initialization logic here
-
-            //Set our position
-            position = new Vector2(100, 100);
-
+            player = new Player(Content.Load<Texture2D>("human"), new Vector2(100, 100), 1f, 100f);
+            tileMap = new Tilemap(new Texture2D[] { Content.Load<Texture2D>("grass"), Content.Load<Texture2D>("rock") }, Content.Load<Texture2D>("bitmap"), 16);
             base.Initialize();
         }
 
@@ -59,10 +44,7 @@ namespace Intro_18._10
             // Create a new SpriteBatch, which can be used to draw textures.
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            map = new TileMap(new[] {Content.Load<Texture2D>("Rock02"), Content.Load<Texture2D>("Grass01") },Content.Load<Texture2D>("BitMap"));
-
             // TODO: use this.Content to load your game content here
-            human = Content.Load<Texture2D>("human");
         }
 
         /// <summary>
@@ -72,40 +54,6 @@ namespace Intro_18._10
         protected override void UnloadContent()
         {
             // TODO: Unload any non ContentManager content here
-        }
-
-        void KeyboardInput()
-        {
-            //Just save our KeyboardState in Key
-            KeyboardState key = Keyboard.GetState();
-
-            //Set Move-Vector to (0,0)
-            move = Vector2.Zero;
-
-            //Check if Left Key is Down
-            if (key.IsKeyDown(Keys.Left))
-                move.X += -1;
-
-            //Check if Right Key is Down
-            if (key.IsKeyDown(Keys.Right))
-                move.X += 1;
-
-            //Check if Up Key is Down
-            if (key.IsKeyDown(Keys.Up))
-                move.Y += -1;
-
-            //Check if Down Key is Down
-            if (key.IsKeyDown(Keys.Down))
-                move.Y += 1;
-
-
-            //Move our Human
-            if(map.Walkable(position + move)
-                && map.Walkable(position + move + new Vector2(human.Width,0))
-                && map.Walkable(position + move + new Vector2(0, human.Height))
-                && map.Walkable(position + move + human.Bounds.Size.ToVector2()))
-                position += move;
-
         }
 
         /// <summary>
@@ -119,12 +67,9 @@ namespace Intro_18._10
                 Exit();
 
             // TODO: Add your update logic here
+            tileMap.Update(gameTime);
+            player.Update(gameTime, tileMap);
 
-            map.Update(gameTime);
-
-            KeyboardInput();
-
-            
             base.Update(gameTime);
         }
 
@@ -134,22 +79,14 @@ namespace Intro_18._10
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
-            //Clear and Draw new Background
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-
-            //spriteBatch.Begin() Call! Dont Forget!
             spriteBatch.Begin();
+            // TODO: Add your drawing code here
+            tileMap.Draw(spriteBatch);
+            player.Draw(spriteBatch);
 
-            map.Draw(spriteBatch);
-
-            //Drawing Function spriteBatch.Draw("Our Texture", "Position", "Color Mask")
-            spriteBatch.Draw(human, position, Color.White);
-
-
-            //spriteBatch.End() Call! Dont Forget!
             spriteBatch.End();
-
             base.Draw(gameTime);
         }
     }

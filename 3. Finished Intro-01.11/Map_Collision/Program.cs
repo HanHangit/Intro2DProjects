@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Intro_18._10
+namespace Map_Collision
 {
 #if WINDOWS || LINUX
     /// <summary>

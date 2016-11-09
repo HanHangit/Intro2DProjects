@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Intro-18.10")]
-[assembly: AssemblyProduct("Intro-18.10")]
+[assembly: AssemblyTitle("Map_Collision")]
+[assembly: AssemblyProduct("Map_Collision")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyCompany("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("d318e8b9-073f-42e4-8b17-f290c8415d4f")]
+[assembly: Guid("01a0eb90-1191-43b4-bf0b-0f4145720cb9")]
 
 // Version information for an assembly consists of the following four values:
 //

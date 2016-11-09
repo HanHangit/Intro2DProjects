@@ -5,34 +5,31 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 
-namespace Intro_18._10
+namespace Map_Collision
 {
     class Tile
     {
-
+        Vector2 position;
         Texture2D texture;
         int id;
-        Vector2 position;
 
-        public Tile(Texture2D text,Vector2 position, int _id)
+        public Tile(Texture2D _texture, Vector2 _position, int _id)
         {
-            this.position = position;
-            texture = text;
+            texture = _texture;
+            position = _position;
             id = _id;
+        }
+
+        public void Update(GameTime gameTime)
+        {
+
         }
 
         public bool Walkable()
         {
-            if (id == 0)
-                return false;
-            else
-                return true;
-        }
-
-        public void Update(GameTime gTime)
-        {
-
+            return (id == 0);
         }
 
         public void Draw(SpriteBatch spriteBatch)
