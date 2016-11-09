@@ -6,11 +6,11 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CB7156C3-D06E-4362-B1DA-B402233315FA}</ProjectGuid>
+    <ProjectGuid>{9A6E46D0-1D7C-4F88-A1C1-BE5416E7F4A0}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Intro_18._10</RootNamespace>
-    <AssemblyName>Intro-18.10</AssemblyName>
+    <RootNamespace>MakeEnemys</RootNamespace>
+    <AssemblyName>MakeEnemys</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <MonoGamePlatform>Windows</MonoGamePlatform>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
