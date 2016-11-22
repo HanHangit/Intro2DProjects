@@ -23,8 +23,6 @@ namespace JumpingALot
 
         bool jump;
 
-        float speedY;
-
         float health;
 
         Vector2 move;
@@ -44,7 +42,7 @@ namespace JumpingALot
         {
             health -= damage;
 
-            if(health <= 0)
+            if (health <= 0)
             {
                 position = new Vector2(100, 100);
                 health = 100;
@@ -58,7 +56,7 @@ namespace JumpingALot
 
             move.Y += gForce;
             move.X = 0;
-            
+
             if (key.IsKeyDown(Keys.Left))
                 move.X -= 3;
 
@@ -70,10 +68,14 @@ namespace JumpingALot
                 jump = true;
                 move.Y = -10;
             }
-
+            /*
+            if (!GameStuff.Instance.map.Walkable(position + new Vector2(0,move.Y))
+                || !GameStuff.Instance.map.Walkable(position + new Vector2(texture.Width, 0) + new Vector2(0,move.Y)))
+                move.Y = 0;
+                */
             //Y-Direction
-            if (GameStuff.Instance.map.Walkable(position + new Vector2(texture.Width,texture.Height) + new Vector2(0, move.Y))
-                && GameStuff.Instance.map.Walkable(position + new Vector2(0, texture.Height) + new Vector2(0, move.Y)))
+            if (GameStuff.Instance.map.Walkable(position + new Vector2(texture.Width, texture.Height) + new Vector2(0, move.Y))
+            && GameStuff.Instance.map.Walkable(position + new Vector2(0, texture.Height) + new Vector2(0, move.Y)))
             {
                 position.Y += move.Y;
             }
@@ -86,7 +88,7 @@ namespace JumpingALot
                     position.Y -= 0.1f;
             }
 
-            if(GameStuff.Instance.map.Walkable(position + new Vector2(texture.Width, texture.Height / 2) + new Vector2(move.X,0))
+            if (GameStuff.Instance.map.Walkable(position + new Vector2(texture.Width, texture.Height / 2) + new Vector2(move.X, 0))
                 && GameStuff.Instance.map.Walkable(position + new Vector2(0, texture.Height / 2) + new Vector2(move.X, 0)))
                 position.X += move.X;
 
