@@ -9,14 +9,16 @@ using Microsoft.Xna.Framework.Input;
 
 namespace Map_Collision
 {
-    class Tilemap
+    class TileMap
     {
         Tile[,] tileMap;
-        int tileSize;
 
-        public Tilemap(Texture2D[] textures, Texture2D bitMap, int _tileSize)
+        int tilesize;
+
+        public TileMap(Texture2D[] textures, Texture2D bitMap, int _tilesize)
         {
-            tileSize = _tileSize;
+            tilesize = _tilesize;
+
             tileMap = new Tile[bitMap.Width, bitMap.Height];
 
             BuildMap(textures, bitMap);
@@ -24,23 +26,21 @@ namespace Map_Collision
 
         private void BuildMap(Texture2D[] textures, Texture2D bitMap)
         {
-            Color[] colores = new Color[bitMap.Width * bitMap.Height];
+            Color[] colors = new Color[bitMap.Width * bitMap.Height];
 
-            bitMap.GetData(colores);
+            bitMap.GetData(colors);
 
-            for(int y = 0; y < tileMap.GetLength(1); y++)
+            for (int y = 0; y < tileMap.GetLength(1); y++)
             {
-                for (int x = 0; x <tileMap.GetLength(0); x++)
+                for( int x= 0; x < tileMap.GetLength(0); x++)
                 {
-                    if(colores[y * tileMap.GetLength(0) + x] == Color.White)
+                    if(colors[y * bitMap.Width + x] == Color.White)
                     {
-                        // Grass
-                        tileMap[x, y] = new Tile(textures[0], new Vector2(x * tileSize, y * tileSize), 0);
+                        tileMap[x, y] = new Tile(textures[0], new Vector2(x * tilesize, y * tilesize), 0);
                     }
                     else
                     {
-                        // Stein
-                        tileMap[x, y] = new Tile(textures[1], new Vector2(x * tileSize, y * tileSize), 1);
+                        tileMap[x, y] = new Tile(textures[1], new Vector2(x * tilesize, y * tilesize), 1);
                     }
                 }
             }
@@ -48,7 +48,7 @@ namespace Map_Collision
 
         public bool Walkable(Vector2 currentPosition)
         {
-            return tileMap[(int)(currentPosition.X / tileSize), (int)(currentPosition.Y / tileSize)].Walkable();
+            return tileMap[(int)currentPosition.X / tilesize, (int)currentPosition.Y / tilesize].Walkable();
         }
 
         public void Update(GameTime gameTime)
@@ -58,9 +58,9 @@ namespace Map_Collision
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            for (int y = 0; y < tileMap.GetLength(1); y++)
+            for(int y = 0; y < tileMap.GetLength(1); y++)
             {
-                for(int x = 0; x <tileMap.GetLength(0); x++)
+                for (int x = 0; x < tileMap.GetLength(0); x++)
                 {
                     tileMap[x, y].Draw(spriteBatch);
                 }
