@@ -12,9 +12,7 @@ namespace Map_Collision
     class Tile
     {
         Vector2 position;
-
         Texture2D texture;
-
         int id;
 
         public Tile(Texture2D _texture, Vector2 _position, int _id)
@@ -31,7 +29,7 @@ namespace Map_Collision
 
         public bool Walkable()
         {
-            return id == 0;
+            return (id == 0);
         }
 
         public void Draw(SpriteBatch spriteBatch)

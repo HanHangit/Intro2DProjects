@@ -1,0 +1,22 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.23107.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Map_Collision", "Map_Collision\Map_Collision.csproj", "{8C183D83-6475-44C9-B8EE-BD3A8CD3DCD9}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8C183D83-6475-44C9-B8EE-BD3A8CD3DCD9}.Debug|x86.ActiveCfg = Debug|x86
+		{8C183D83-6475-44C9-B8EE-BD3A8CD3DCD9}.Debug|x86.Build.0 = Debug|x86
+		{8C183D83-6475-44C9-B8EE-BD3A8CD3DCD9}.Release|x86.ActiveCfg = Release|x86
+		{8C183D83-6475-44C9-B8EE-BD3A8CD3DCD9}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

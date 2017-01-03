@@ -51,7 +51,7 @@ namespace Map_Collision
         }
 
         //Handle KeyboardInput Movement Control
-        void KeyboardInput(Tilemap tileMap)
+        void KeyboardInput(TileMap tileMap)
         {
             //Just save our KeyboardState in Key
             KeyboardState key = Keyboard.GetState();
@@ -76,13 +76,12 @@ namespace Map_Collision
                 move.Y += 1;
 
             if (tileMap.Walkable(position + move)
-               && tileMap.Walkable(position + move + new Vector2(texture.Width, 0))
-               && tileMap.Walkable(position + move + new Vector2(0, texture.Height))
-               && tileMap.Walkable(position + move + new Vector2(texture.Width, texture.Height)))
+                && tileMap.Walkable(position + move + new Vector2(texture.Width, 0))
+                && tileMap.Walkable(position + move + new Vector2(0, texture.Height))
+                && tileMap.Walkable(position + move + new Vector2(texture.Width, texture.Height)))
                 {
                     position += move;
                 }
-
         }
 
         //Function for attacking Player
@@ -99,7 +98,7 @@ namespace Map_Collision
             }
         }
 
-        public void Update(GameTime gTime, Tilemap tileMap)
+        public void Update(GameTime gTime, TileMap tileMap)
         {
             KeyboardInput(tileMap);
         }
