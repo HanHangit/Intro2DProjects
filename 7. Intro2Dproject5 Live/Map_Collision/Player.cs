@@ -23,7 +23,7 @@ namespace Map_Collision
         public Vector2 size;
 
         //Current LifePoints
-        float health;
+        public float health;
 
         //Human Texture
         Texture2D texture;
@@ -113,9 +113,7 @@ namespace Map_Collision
                 health -= amount;
             else
             {
-                //Reset our health and position
-                health = 100;
-                position = new Vector2(100, 100);
+                health = 0;
             }
         }
 

@@ -39,8 +39,8 @@ namespace Map_Collision
                 Vector2 dir1 = rotate(direction, 10);
                 Vector2 dir2 = rotate(direction, -10);
 
-                GameStuff.Instance.bullet.Add(new RocketBullet(GameStuff.Instance.bulletTexture[0], position, dir1, 2, 1,2f));
-                GameStuff.Instance.bullet.Add(new RocketBullet(GameStuff.Instance.bulletTexture[0], position, dir2, 2, 1,2f));
+                //GameStuff.Instance.bullet.Add(new RocketBullet(GameStuff.Instance.bulletTexture[0], position, dir1, 2, 1,2f));
+                //GameStuff.Instance.bullet.Add(new RocketBullet(GameStuff.Instance.bulletTexture[0], position, dir2, 2, 1,2f));
             }
 
         }

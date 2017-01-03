@@ -109,3 +109,9 @@
 /processorParam:TextureFormat=Color
 /build:Bullet.png
 
+#begin SimpleText.spritefont
+/importer:FontDescriptionImporter
+/processor:FontDescriptionProcessor
+/processorParam:TextureFormat=Compressed
+/build:SimpleText.spritefont
+

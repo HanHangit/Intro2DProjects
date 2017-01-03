@@ -13,6 +13,8 @@ namespace Map_Collision
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Stopwatch stop;
+        PopUp deadPopup;
+        bool pause;
 
         public Game1()
         {
@@ -28,6 +30,7 @@ namespace Map_Collision
         /// </summary>
         protected override void Initialize()
         {
+            pause = false;
             // TODO: Add your initialization logic here
             GameStuff.Instance.player = new Player(Content.Load<Texture2D>("human"), new Vector2(100, 100), 1f, 100f);
 
@@ -54,6 +57,9 @@ namespace Map_Collision
 
             GameStuff.Instance.enemyList.Add(new EnemyOnRangePlattform(Content.Load<Texture2D>("Hunter"), new Vector2(1000, 500), 1, 1f, 3));
 
+            deadPopup = new PopUp(Content.Load<SpriteFont>("SimpleText"),
+                new Rectangle(200, 200, 100, 100), "Game Over!!!", Content.Load<Texture2D>("rock"));
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -75,6 +81,15 @@ namespace Map_Collision
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
                 Exit();
+            if (pause)
+            {
+                if (Keyboard.GetState().IsKeyDown(Keys.P))
+                    pause = false;
+                return;
+            }
+
+            if (GameStuff.Instance.player.health <= 0)
+                pause = true;
 
             // TODO: Add your update logic here
             GameStuff.Instance.tileMap.Update(gameTime);
@@ -115,6 +130,9 @@ namespace Map_Collision
 
             foreach (Bullet b in GameStuff.Instance.bullet)
                 b.Draw(spriteBatch);
+
+            if (pause)
+                deadPopup.Draw(spriteBatch);
 
 
             spriteBatch.End();
