@@ -3,6 +3,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System.Diagnostics;
 using System.Collections.Generic;
+using System.IO;
 
 namespace Map_Collision
 {
@@ -36,7 +37,13 @@ namespace Map_Collision
                 new AnimatedSprite.Animation(AnimatedSprite.AnimationStates.Jumping, 5, 10)};
             // TODO: Add your initialization logic here
             AnimatedSprite animatedSprite = new AnimatedSprite(Content.Load<Texture2D>("mage"), new Vector2(96, 96), 30, 100f, animations);
-            GameStuff.Instance.player = new Player(Content.Load<Texture2D>("human"), new Vector2(100, 100), 1f, 100f, animatedSprite);
+            if (File.Exists("savegame"))
+            {
+                SaveGame saveGame = SaveGame.LoadXML("savegame");
+                GameStuff.Instance.player = new Player(Content.Load<Texture2D>("human"), saveGame.playerPosition, 1f, 100f, animatedSprite);
+            }
+            else
+                GameStuff.Instance.player = new Player(Content.Load<Texture2D>("human"), new Vector2(100, 100), 1f, 100f, animatedSprite);
 
             GameStuff.Instance.tileMap = new Tilemap(new Texture2D[] { Content.Load<Texture2D>("grass"), Content.Load<Texture2D>("rock") }, Content.Load<Texture2D>("NewTower"), 16);
             base.Initialize();
@@ -81,8 +88,11 @@ namespace Map_Collision
         protected override void Update(GameTime gameTime)
         {
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            {
+                SaveGame saveGame = new SaveGame(GameStuff.Instance.player.position);
+                SaveGame.SaveXML(saveGame, "savegame");
                 Exit();
-
+            }
             // TODO: Add your update logic here
             GameStuff.Instance.tileMap.Update(gameTime);
             GameStuff.Instance.player.Update(gameTime);
